@@ -10,18 +10,34 @@ const Input = styled.input`
   border-radius: 6px;
 `;
 const Inputs = () => {
+const loginHndler = () => {
+console.log(email , number , name , lastname)
+}
+const[email ,setEmail] =useState("");
+const[number , setNumber] = useState("");
+const[name , setName] = useState("");
+const[lastname , setLastname] = useState("");
 
 
   const emailHnandler = (event) =>{
    setEmail(event.target.value)
-    
+  }
+  const numberHndler = (event) => {
+    setNumber(event.target.value)
+  }
+  const nameHndler = (event) => {
+setName(event.target.value)
+  }
+  const lastnameHandler = (event )=>{
+    setLastname(event.target.value)
   }
   return (
     <>
-      <Input placeholder="enter email" onChange={emailHnandler}/>
-      <Input placeholder="enter phone number" />
-      <Input placeholder="name" />
-      <Input placeholder="last name" />
+      <Input type="email" placeholder="enter email" onChange={emailHnandler}/>
+      <Input type="text" placeholder="enter phone number" onChange={numberHndler}/>
+      <Input type="text" placeholder="name" onChange={nameHndler}/>
+      <Input type="text" placeholder="last name" onChange={lastnameHandler}/>
+      <button onClick={loginHndler}>click</button>
     </>
   );
 };
