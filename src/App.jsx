@@ -1,5 +1,6 @@
 import Header from "./Components/Header"
 import Container from "./Components/Container"
+import List from "./Components/List"
 
 function App() {
  
@@ -8,6 +9,7 @@ function App() {
     <>
       <Header/>
       <Container/>
+      <List/>
     </>
   )
 }
