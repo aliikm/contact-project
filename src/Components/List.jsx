@@ -9,6 +9,7 @@ const Div = styled.div`
   margin: auto;
   margin-top: 70px;
   border-radius: 15px;
+  
 `;
 function List() {
   return (
@@ -19,12 +20,18 @@ function List() {
             <tr>
               <th>name</th>
               <th>family</th>
-              <th>phone number</th>
               <th>email</th>
+              <th>phone number</th>
+              <th>delet</th>
             </tr>
           </thead>
           <tbody>
-            <tr></tr>
+            <tr>
+                <th>ergtr</th>
+                <th></th>
+                <td></td>
+                <td></td>
+            </tr>
           </tbody>
         </table>
       </Div>
