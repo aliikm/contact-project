@@ -1,18 +1,10 @@
-.table{
-    width: 100%;
-    border: 1px solid red;
+li{
+    display: flex;
+    gap: 60px;
+    align-items: center;
     
 }
-thead{
-    width: 100%;
-    border: 1px solid green;
-    background-color: rgb(231, 73, 0);
-}
-tbody{
-    width: 100%;
-    height: auto;
-    background-color: rgb(134, 134, 134);
-    text-align: center;
-    vertical-align: middle;
-    
+.container{
+    display: flex;
+    justify-content: space-around;
 }
