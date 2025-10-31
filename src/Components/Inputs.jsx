@@ -20,6 +20,10 @@ const Button = styled.button`
   margin-left: 80px;
   margin-top: 20px;
   color: white;
+   @media (max-width : 600px){
+    width: 70%;
+   };
+    
 `;
 function Inputs() {
   const [contacts, setContacts] = useState([]);
@@ -82,8 +86,11 @@ function Inputs() {
       <Button onClick={loginHndler}>click</Button>
       <div>
         <div>{alert && <p>{alert}</p>}</div>
-        <List contacts={contacts} value={setFormData} />
+        
       </div>
+    
+        <List contacts={contacts} value={setFormData} setContacts={setContacts}/>
+      
     </>
   );
 }
