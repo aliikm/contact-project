@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
+import { createContext } from "react";
 import styled from "styled-components";
 import List from "./List";
 import { v4 } from "uuid";
@@ -20,42 +21,90 @@ const Button = styled.button`
   margin-left: 80px;
   margin-top: 20px;
   color: white;
-   @media (max-width : 600px){
+  @media (max-width: 600px) {
     width: 70%;
-   };
-    
+  }
 `;
-function Inputs() {
-  const [contacts, setContacts] = useState([]);
-  const [formData, setFormData] = useState({
+const intialState = {
+  contacts: [],
+  formdata: {
     id: "",
     email: "",
     phone: "",
     name: "",
     lastName: "",
-  });
-  const [alert, setAlert] = useState("");
+  },
+  alert: "",
+};
+
+const reducer = (state, action) => {
+  console.log(state, action);
+  switch (action.type) {
+    case "ALERT":
+      return { ...state, alert: action.payload };
+    case "SET":
+      return {
+        ...state,
+        contacts: action.payload,
+      };
+    case "EMPTYINPUT":
+      return {
+        ...state,
+        formdata: action.payload,
+      };
+    case "CHANGE":
+      return {
+        ...state,
+        formdata: {
+          ...state.formdata,
+          ...action.payload,
+        },
+      };
+    default:
+      return state;
+  }
+};
+
+const UserContext = createContext();
+function Inputs() {
+  const [state, dispatch] = useReducer(reducer, intialState);
+  const { formdata, contacts, alert } = state;
 
   const loginHndler = () => {
-    if (!formData.name ||
-      !formData.lastName ||
-      !formData.email ||
-      !formData.phone) {
-      setAlert("empty");
+    const { name, lastName, email, phone } = formdata;
+
+    if (
+      !formdata.name ||
+      !formdata.lastName ||
+      !formdata.email ||
+      !formdata.phone
+    ) {
+      dispatch({ type: "ALERT", payload: "please write filds" });
       return;
     }
-    setAlert("");
-    const newContact = { ...formData, id: v4() };
-    setContacts((contacts) => [...contacts, newContact]);
-    setFormData({ email: "", phone: "", name: "", lastName: "" });
+    dispatch({ type: "ALERT", payload: "" });
+
+    const newcontact = { ...formdata, id: v4() };
+    dispatch({
+      type: "SET",
+      payload: [...contacts, newcontact],
+    });
+    dispatch({
+      type: "EMPTYINPUT",
+      payload: {
+        id: "",
+        email: "",
+        phone: "",
+        name: "",
+        lastName: "",
+      },
+    });
   };
 
   const changeHnandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setFormData((formData) => ({ ...formData, [name]: value }));
+    const { name, value } = event.target;
+    dispatch({ type: "CHANGE", payload: { [name]: value } });
   };
-
 
   return (
     <>
@@ -63,33 +112,37 @@ function Inputs() {
         type="email"
         placeholder="enter email"
         name="email"
-        value={formData.email}
-        onChange={changeHnandler} />
+        value={formdata.email}
+        onChange={changeHnandler}
+      />
       <Input
         type="text"
         placeholder="enter phone number"
         name="phone"
-        value={formData.phone}
-        onChange={changeHnandler} />
+        value={formdata.phone}
+        onChange={changeHnandler}
+      />
       <Input
         type="text"
         placeholder="name"
         name="name"
-        value={formData.name}
-        onChange={changeHnandler} />
+        value={formdata.name}
+        onChange={changeHnandler}
+      />
       <Input
         type="text"
         placeholder="last name"
         name="lastName"
-        value={formData.lastName}
-        onChange={changeHnandler} />
+        value={formdata.lastName}
+        onChange={changeHnandler}
+      />
       <Button onClick={loginHndler}>click</Button>
       <div>
-        <div>{alert && <p>{alert}</p>}</div>
-        
+        <div></div>
       </div>
-    
-        <List contacts={contacts} value={setFormData} setContacts={setContacts}/>
+<UserContext.Provider value={intialState}>
+<List />
+</UserContext.Provider>
       
     </>
   );

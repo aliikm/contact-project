@@ -20,14 +20,14 @@ const Img = styled.img`
   
 `
 
-function List({contacts}) {
+function List() {
   const deletHandler = (id)=> {
 
   }
   return (
     <>
       <Div className={styles.container}>
-        {contacts.length ?(  <ul className={styles.li}>{
+        {/* {contacts.length ?(  <ul className={styles.li}>{
           contacts.map((contact ) => (
             <li key={contact.id} >
               <p><span><Img src="../../rename_6077150.png"/></span>{contact.name} {contact.lastName}</p>
@@ -37,7 +37,7 @@ function List({contacts}) {
             </li>
           ))}
           </ul>) : <p>no contact yet</p> }
-      
+       */}
       </Div> 
    
  
