@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import styles from "../Components/List.module.css"
+import { useContext } from "react";
+import { DataContext } from "./Inputs";
 
 
 const Div = styled.div`
@@ -21,23 +23,24 @@ const Img = styled.img`
 `
 
 function List() {
+  const {state} = useContext(DataContext)
   const deletHandler = (id)=> {
 
   }
   return (
     <>
       <Div className={styles.container}>
-        {/* {contacts.length ?(  <ul className={styles.li}>{
-          contacts.map((contact ) => (
+        {state.contacts.length ?(  <ul className={styles.li}>{
+          state.contacts.map((contact) => (
             <li key={contact.id} >
-              <p><span><Img src="../../rename_6077150.png"/></span>{contact.name} {contact.lastName}</p>
-              <p><span><Img src="../../sign_5825936.png"/> :</span> {contact.email}</p>
-              <p><span><Img src="../../phone_4639549.png"/></span> {contact.phone}</p>
+              <p><span><Img src="../../rename_6077150.png"/></span>{state.contacts.name} {state.lastName}</p>
+              <p><span><Img src="../../sign_5825936.png"/> :</span> {state.contacts.email}</p>
+              <p><span><Img src="../../phone_4639549.png"/></span> {state.contacts.phone}</p>
               <button onClick={deletHandler}><Img src="../../delete_11540608.png"/></button>
             </li>
           ))}
           </ul>) : <p>no contact yet</p> }
-       */}
+      
       </Div> 
    
  

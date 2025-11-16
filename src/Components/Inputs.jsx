@@ -65,7 +65,7 @@ const reducer = (state, action) => {
   }
 };
 
-const UserContext = createContext();
+export const DataContext = createContext();
 function Inputs() {
   const [state, dispatch] = useReducer(reducer, intialState);
   const { formdata, contacts, alert } = state;
@@ -140,9 +140,9 @@ function Inputs() {
       <div>
         <div></div>
       </div>
-<UserContext.Provider value={intialState}>
+<DataContext.Provider value={{state , dispatch}}>
 <List />
-</UserContext.Provider>
+</DataContext.Provider>
       
     </>
   );
