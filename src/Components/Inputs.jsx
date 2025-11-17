@@ -26,7 +26,6 @@ const Button = styled.button`
   }
 `;
 const intialState = {
-  contacts: [],
   formdata: {
     id: "",
     email: "",
@@ -34,6 +33,7 @@ const intialState = {
     name: "",
     lastName: "",
   },
+  contacts: [],
   alert: "",
 };
 
@@ -60,6 +60,8 @@ const reducer = (state, action) => {
           ...action.payload,
         },
       };
+  
+
     default:
       return state;
   }
@@ -140,10 +142,10 @@ function Inputs() {
       <div>
         <div></div>
       </div>
-<DataContext.Provider value={{state , dispatch}}>
-<List />
-</DataContext.Provider>
-      
+
+      <DataContext.Provider value={{ state, dispatch }}>
+        <List />
+      </DataContext.Provider>
     </>
   );
 }
