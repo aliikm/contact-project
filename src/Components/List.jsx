@@ -23,11 +23,8 @@ const Img = styled.img`
 `
 
 function List() {
-  const {state} = useContext(DataContext)
-const deleteHandler = (id) => {
-  const filtered = state.contacts.filter((contact) => contact.id !== id);
-  
-};
+  const {state , deleteHandler} = useContext(DataContext)
+
   return (
     <>
       <Div className={styles.container}>
@@ -37,7 +34,7 @@ const deleteHandler = (id) => {
               <p><span><Img src="../../rename_6077150.png"/></span>{contact.name || "noname"} {contact.lastName}</p>
               <p><span><Img src="../../sign_5825936.png"/> :</span> {contact.email}</p>
               <p><span><Img src="../../phone_4639549.png"/></span> {contact.phone}</p>
-              <button onClick={ deleteHandler}><Img src="../../delete_11540608.png"/></button>
+              <button onClick={()=> deleteHandler(contact.id)}><Img src="../../delete_11540608.png"/></button>
             </li>
           ))}
           </ul>) : <p>no contact yet</p> }

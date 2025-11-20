@@ -60,6 +60,10 @@ const reducer = (state, action) => {
           ...action.payload,
         },
       };
+      case "DELET":
+        const id = action.payload
+        return {...state,
+          contacts:state.contacts.filter(c =>c.id !== id)}
   
 
     default:
@@ -101,13 +105,18 @@ function Inputs() {
         lastName: "",
       },
     });
+
   };
 
   const changeHnandler = (event) => {
     const { name, value } = event.target;
     dispatch({ type: "CHANGE", payload: { [name]: value } });
   };
-
+const deleteHandler =(id) =>{
+  
+  dispatch({type : "DELET" ,payload:id})
+  
+}
   return (
     <>
       <Input
@@ -143,7 +152,7 @@ function Inputs() {
         <div></div>
       </div>
 
-      <DataContext.Provider value={{ state, dispatch }}>
+      <DataContext.Provider value={{ state, dispatch , deleteHandler}}>
         <List />
       </DataContext.Provider>
     </>
